@@ -53,7 +53,7 @@ This repo ingests **TheSportsDB v2** soccer data into Kafka via Python producers
 > **Ports**: Airflow UI → `http://localhost:9050`, Grafana → `http://localhost:3000`
 
 ---
-![Diagram](screenshots/Data Flow.jpg)
+![Diagram](https://github.com/gharam15/EndToEnd-Football-Streaming-Data-Engineer-Project-ITI/blob/main/screenshots/Data%20Flow.jpg)
 
 
 --- 
@@ -465,11 +465,10 @@ For fresh visuals, point DirectQuery to:
 - `dw.dim_league`, `dw.dim_team`, `dw.dim_player`, `dw.dim_venue`, `dw.dim_channel`
 For historical deep dives, use `dw.fact_event_snapshot`, `dw.fact_event_stat`, etc.
 
-![Image](screenshots/intro dashboard.jpg)
+![Image](https://github.com/gharam15/EndToEnd-Football-Streaming-Data-Engineer-Project-ITI/blob/main/screenshots/intro%20dashboard.jpg)
 ![Image](screenshots/dashbord.jpg)
-![Image](screenshots/WhatsApp Image 2025-08-15 at 3.49.53 PM.jpg)
-![Image](screenshots/WhatsApp Image 2025-08-15 at 3.36.55 PM.jpg)
-![Image](screenshots/WhatsApp Image 2025-08-15 at 10.34.04 PM.jpeg)
+![Image](https://github.com/gharam15/EndToEnd-Football-Streaming-Data-Engineer-Project-ITI/blob/main/screenshots/WhatsApp%20Image%202025-08-15%20at%203.49.53%20PM.jpg)
+![Image](https://github.com/gharam15/EndToEnd-Football-Streaming-Data-Engineer-Project-ITI/blob/main/screenshots/WhatsApp%20Image%202025-08-15%20at%2010.34.04%20PM.jpeg)
 
 
 ### G. Why ReplacingMergeTree here?
