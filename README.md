@@ -151,7 +151,7 @@ cat simpl   # press <TAB> twice to auto-complete the file name, then Enter
 
 - Point panels to the daily Parquet (`/opt/airflow/dags/data/kafka_invalid/*.parquet`) or to Prometheus if you enable exporters.
 
-![Image](screenshots/Screenshot 2025-08-14 164818 (2).png)
+![Image](https://github.com/gharam15/EndToEnd-Football-Streaming-Data-Engineer-Project-ITI/blob/main/screenshots/Screenshot%202025-08-14%20164818%20(2).png)
 ![Image](screenshots/dahsgrafana.png)
 
 **Alerting when there an invalid data via email**
