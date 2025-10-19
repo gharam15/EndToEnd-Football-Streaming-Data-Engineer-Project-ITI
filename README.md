@@ -1,4 +1,4 @@
-# TheSportsDB Streaming Stack (Kafka → Spark → Airflow/Grafana)
+# The SportsDB Streaming Stack (Kafka → Spark → Airflow/Grafana)
 
 **Date:** 2025-08-23
 
@@ -53,6 +53,10 @@ This repo ingests **TheSportsDB v2** soccer data into Kafka via Python producers
 > **Ports**: Airflow UI → `http://localhost:9050`, Grafana → `http://localhost:3000`
 
 ---
+![Diagram](screenshots/Data Flow.jpg)
+
+
+--- 
 
 ## 1) Kafka + Python Producers (Section 1)
 
@@ -136,10 +140,23 @@ cat simpl   # press <TAB> twice to auto-complete the file name, then Enter
 - **Nightly (00:00 Africa/Cairo)**: `venue_proucer_daily_dag`, `team_proucer_daily_dag`, `schedual_proucer_daily_dag`, `player_proucer_daily_dag`, `league_proucer_daily_dag`, `event_proucer_daily_dag`, `event_stats_daily_dag`.
 - **Triage (06:00)**: `save_rejected_topics_as_parquet_daily` — **BashOperator** running `python /opt/airflow/scripts/consume_kafka.py`, producing Parquet under `airflow/dags/data/kafka_invalid/` for Grafana/analysis.
 
+**Alerting when there an error on pipeline via email detecting where is the problem**
+![Image](screenshots/alert failed.png)
+
 **Grafana**
 
 - Comes up via compose on **`http://localhost:3000`**. SMTP creds/alerts are configured in compose (redact real values before commit if needed).
+- used for stream live matches stats 
+![Image](screenshots/WhatsApp Image 2025-08-15 at 5.09.33 PM.jpeg)
+
 - Point panels to the daily Parquet (`/opt/airflow/dags/data/kafka_invalid/*.parquet`) or to Prometheus if you enable exporters.
+
+![Image](screenshots/Screenshot 2025-08-14 164818 (2).png)
+![Image](screenshots/dahsgrafana.png)
+
+**Alerting when there an invalid data via email**
+
+![Image](screenshots/alert.png)
 
 ---
 
@@ -447,6 +464,13 @@ For fresh visuals, point DirectQuery to:
 - `dw.v_fact_event_latest` (latest factual state)
 - `dw.dim_league`, `dw.dim_team`, `dw.dim_player`, `dw.dim_venue`, `dw.dim_channel`
 For historical deep dives, use `dw.fact_event_snapshot`, `dw.fact_event_stat`, etc.
+
+![Image](screenshots/intro dashboard.jpg)
+![Image](screenshots/dashbord.jpg)
+![Image](screenshots/WhatsApp Image 2025-08-15 at 3.49.53 PM.jpg)
+![Image](screenshots/WhatsApp Image 2025-08-15 at 3.36.55 PM.jpg)
+![Image](screenshots/WhatsApp Image 2025-08-15 at 10.34.04 PM.jpeg)
+
 
 ### G. Why ReplacingMergeTree here?
 - In **staging** (raw) and in **dw.fact_event**/**dims**, `ReplacingMergeTree` (with proper `ORDER BY` and a version column like `updated_at`) lets merges keep the **latest state per key** without expensive batch dedup jobs—ideal for live scores and evolving event details.
